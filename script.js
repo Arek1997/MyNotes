@@ -11,7 +11,7 @@ const save = document.querySelector('.save');
 const cancel = document.querySelector('.cancel ');
 
 let taskCategoryText, newNote, color;
-const notesArr = [];
+let notesArr = JSON.parse(localStorage.getItem('note')) || [];
 
 const showPopup = function () {
 	notePanel.classList.add('showPanel');
@@ -28,15 +28,21 @@ const removeTasks = function (e) {
 		setTimeout(() => noNotes.classList.remove('show'), 1500);
 	} else {
 		[...allNotes].forEach((el) => el.remove());
+		notesArr = [];
+		updateLocalStorage();
 	}
 };
 
 const removeTask = function (e) {
+	const index = e.target.closest('.note').dataset.id;
+
 	if (
 		e.target.classList.contains('delete-note') ||
 		e.target.classList.contains('icon')
 	)
-		e.target.closest('.note').remove();
+		notesArr.splice(index, 1);
+	e.target.closest('.note').remove();
+	updateLocalStorage();
 };
 
 const clearPopupInputs = function () {
@@ -74,6 +80,33 @@ const addToLocalStorage = function () {
 	localStorage.setItem('note', JSON.stringify(notesArr));
 };
 
+const updateLocalStorage = function () {
+	localStorage.setItem('note', JSON.stringify(notesArr));
+	renderLocalStorage();
+};
+
+const renderLocalStorage = function () {
+	noteBoard.innerHTML = notesArr
+		.map((note, i) => {
+			return `
+      
+       <div class="note" style="background-color: ${note.color}" data-id="${i}">
+        <div class="note-header">
+          <h3 class="note-title">${note.title}</h3>
+          <button class="delete-note">
+            <i class="fas fa-times icon"></i>
+          </button>
+        </div>
+        <div class="note-body">
+          ${note.text}
+        </div>
+      </div>
+      
+      `;
+		})
+		.join('');
+};
+
 const addNote = function () {
 	if (taskCategory.value === '0' || taskContent.value === '')
 		return (errorMsg.style.visibility = 'visible');
@@ -109,3 +142,4 @@ cancel.addEventListener('click', hidePanel);
 removeAllTasks.addEventListener('click', removeTasks);
 save.addEventListener('click', addNote);
 noteBoard.addEventListener('click', removeTask);
+document.addEventListener('DOMContentLoaded', renderLocalStorage);

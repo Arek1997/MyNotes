@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notatki</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Notatki</title>
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap&subset=latin-ext"
-      rel="stylesheet"
-    />
+		<link
+			href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap&subset=latin-ext"
+			rel="stylesheet"
+		/>
 
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script defer src="script.js"></script>
-  </head>
+		<link rel="stylesheet" href="./src/style/style.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+			integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<script type="module" src="./dist/script.js"></script>
+	</head>
 
-  <body>
-    <p class="no-notes">Brak notatek.</p>
-    <div class="menu">
-      <h1><i class="fas fa-sticky-note"></i> MyNotes</h1>
-      <div class="menu-buttons">
-        <button class="add icon"><i class="fas fa-plus"></i> Dodaj</button>
-        <button class="delete-all icon">
-          <i class="fas fa-trash-alt"></i> Usuń wszystkie
-        </button>
-      </div>
-    </div>
+	<body>
+		<p class="no-notes">Brak notatek.</p>
+		<div class="menu">
+			<h1><i class="fas fa-sticky-note"></i> MyNotes</h1>
+			<div class="menu-buttons">
+				<button class="add icon"><i class="fas fa-plus"></i> Dodaj</button>
+				<button class="delete-all icon">
+					<i class="fas fa-trash-alt"></i> Usuń wszystkie
+				</button>
+			</div>
+		</div>
 
-    <div class="note-area">
-      <!-- <div class="note">
+		<div class="note-area">
+			<!-- <div class="note">
         <div class="note-header">
           <h3 class="note-title">Notatka #1</h3>
           <button class="delete-note">
@@ -59,29 +59,29 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </div>
       </div> -->
-    </div>
+		</div>
 
-    <div class="note-panel">
-      <h2>Dodaj notatkę</h2>
-      <label for="category">Wybierz kategorię</label>
-      <select id="category">
-        <option value="0" disabled selected>- wybierz kategorię -</option>
-        <option value="1">Zakupy</option>
-        <option value="2">Praca</option>
-        <option value="3">Inne</option>
-      </select>
+		<div class="note-panel">
+			<h2>Dodaj notatkę</h2>
+			<label for="category">Wybierz kategorię</label>
+			<select id="category">
+				<option value="0" disabled selected>- wybierz kategorię -</option>
+				<option value="1">Zakupy</option>
+				<option value="2">Praca</option>
+				<option value="3">Inne</option>
+			</select>
 
-      <label for="text">Wpisz treść notatki</label>
-      <textarea id="text"></textarea>
+			<label for="text">Wpisz treść notatki</label>
+			<textarea id="text"></textarea>
 
-      <p class="error">Uzupełnij wszystkie pola!</p>
+			<p class="error">Uzupełnij wszystkie pola!</p>
 
-      <div class="panel-buttons">
-        <button class="save icon"><i class="fas fa-save"></i> Zapisz</button>
-        <button class="cancel icon">
-          <i class="far fa-window-close"></i> Anuluj
-        </button>
-      </div>
-    </div>
-  </body>
+			<div class="panel-buttons">
+				<button class="save icon"><i class="fas fa-save"></i> Zapisz</button>
+				<button class="cancel icon">
+					<i class="far fa-window-close"></i> Anuluj
+				</button>
+			</div>
+		</div>
+	</body>
 </html>

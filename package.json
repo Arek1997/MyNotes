@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  },
+  "name": "projekt-6---html-i-css",
+  "description": "https://arek1997.github.io/MyNotes/",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arek1997/MyNotes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arek1997/MyNotes/issues"
+  },
+  "homepage": "https://github.com/Arek1997/MyNotes#readme"
+}

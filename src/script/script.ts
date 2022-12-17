@@ -1,17 +1,22 @@
-const addBtn = document.querySelector('.add');
-const removeAllTasks = document.querySelector('.delete-all');
-const allNotes = document.getElementsByClassName('note');
-const noteBoard = document.querySelector('.note-area');
-const notePanel = document.querySelector('.note-panel');
-const taskCategory = document.querySelector('#category');
-const taskContent = document.querySelector('#text');
-const errorMsg = document.querySelector('.error');
-const noNotes = document.querySelector('.no-notes');
-const save = document.querySelector('.save');
-const cancel = document.querySelector('.cancel ');
+import { noteArrInterface } from './interface';
 
-let taskCategoryText, newNote, color;
-let notesArr = JSON.parse(localStorage.getItem('note')) || [];
+const addBtn = document.querySelector('.add') as HTMLButtonElement;
+const removeAllTasks = document.querySelector(
+	'.delete-all'
+) as HTMLButtonElement;
+const allNotes = document.getElementsByClassName('note')!;
+const noteBoard = document.querySelector('.note-area') as HTMLDivElement;
+const notePanel = document.querySelector('.note-panel') as HTMLDivElement;
+const taskCategory = document.querySelector('#category') as HTMLSelectElement;
+const taskContent = document.querySelector('#text') as HTMLTextAreaElement;
+const errorMsg = document.querySelector('.error') as HTMLParagraphElement;
+const noNotes = document.querySelector('.no-notes') as HTMLParagraphElement;
+const save = document.querySelector('.save') as HTMLButtonElement;
+const cancel = document.querySelector('.cancel ') as HTMLButtonElement;
+
+let taskCategoryText: string, newNote: HTMLDivElement, color: string;
+let notesArr: noteArrInterface[] =
+	JSON.parse(localStorage.getItem('note')!) || [];
 
 const showPopup = function () {
 	notePanel.classList.add('showPanel');
@@ -22,7 +27,7 @@ const hidePanel = function () {
 	clearPopupInputs();
 };
 
-const removeTasks = function (e) {
+const removeTasks = function () {
 	if (allNotes.length === 0) {
 		noNotes.classList.add('show');
 		setTimeout(() => noNotes.classList.remove('show'), 1500);
@@ -33,15 +38,17 @@ const removeTasks = function (e) {
 	}
 };
 
-const removeTask = function (e) {
-	const index = e.target.closest('.note').dataset.id;
+const removeTask = function (e: Event) {
+	const target = e.target as HTMLElement;
+
+	const index = (target.closest('.note') as HTMLDivElement).dataset.id!;
 
 	if (
-		e.target.classList.contains('delete-note') ||
-		e.target.classList.contains('icon')
+		target.classList.contains('delete-note') ||
+		target.classList.contains('icon')
 	)
-		notesArr.splice(index, 1);
-	e.target.closest('.note').remove();
+		notesArr.splice(+index, 1);
+	target.closest('.note').remove();
 	updateLocalStorage();
 };
 
@@ -51,7 +58,7 @@ const clearPopupInputs = function () {
 	errorMsg.style.visibility = 'hidden';
 };
 
-const setColor = function (value, element) {
+const setColor = function (value: string, element: HTMLDivElement) {
 	if (value === 'Zakupy') {
 		element.style.backgroundColor = 'rgb(74, 211, 80)';
 		return (color = 'rgb(74, 211, 80)');
@@ -87,7 +94,7 @@ const updateLocalStorage = function () {
 
 const renderLocalStorage = function () {
 	noteBoard.innerHTML = notesArr
-		.map((note, i) => {
+		.map((note, i: number) => {
 			return `
       
        <div class="note" style="background-color: ${note.color}" data-id="${i}">
@@ -108,23 +115,24 @@ const renderLocalStorage = function () {
 };
 
 const addNote = function () {
-	if (taskCategory.value === '0' || taskContent.value === '')
+	if (taskCategory.value === '0' || taskContent.value === '') {
 		return (errorMsg.style.visibility = 'visible');
+	}
 
-	taskCategoryText = taskCategory.options[taskCategory.value].text;
+	taskCategoryText = taskCategory.options[+taskCategory.value].text;
 	newNote = document.createElement('div');
 	newNote.classList.add('note');
 
 	const html = `
-            <div class="note-header">
-          <h3 class="note-title">${taskCategoryText}</h3>
-          <button class="delete-note">
-            <i class="fas fa-times icon"></i>
-          </button>
-        </div>
-        <div class="note-body">
-          ${taskContent.value}
-        </div>
+						<div class="note-header">
+							<h3 class="note-title">${taskCategoryText}</h3>
+							<button class="delete-note">
+								<i class="fas fa-times icon"></i>
+							</button>
+						</div>
+						<div class="note-body">
+							${taskContent.value}
+						</div>
         `;
 
 	addToLocalStorage();
